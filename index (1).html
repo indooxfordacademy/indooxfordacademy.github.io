@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Indo Oxford Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#0a1f3c;--blue:#0e5fa8;--gold:#c9993a;--gold-light:#f0c96a;--cream:#fdf8f0;--white:#ffffff;--text:#1a2e45;--muted:#6b7d92;--border:rgba(14,95,168,0.1);--shadow:0 20px 60px rgba(10,31,60,0.08)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    /* HEADER */
+    header{background:var(--navy);padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+    .header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;height:68px;gap:16px}
+    .logo-wrap{width:44px;height:44px;border-radius:10px;background:#fff;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+    .logo-wrap img{width:100%;height:100%;object-fit:cover}
+    .brand-text .name{font-family:'Playfair Display',serif;font-size:18px;color:#fff;font-weight:700;line-height:1}
+    .brand-text .tagline{font-size:11px;color:var(--gold-light);margin-top:3px;letter-spacing:.5px}
+    nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+    nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:14px;font-weight:500;padding:8px 12px;border-radius:8px;transition:all .2s}
+    nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+    .nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important}
+    .nav-cta:hover{background:var(--gold-light)!important}
+    /* HERO */
+    .hero{background:var(--navy);padding:70px 24px 80px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-60px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,153,58,.15) 0%,transparent 70%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-40px;left:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(14,95,168,.3) 0%,transparent 70%);pointer-events:none}
+    .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px;position:relative;z-index:1}
+    @media(min-width:800px){.hero-inner{grid-template-columns:1fr 1fr;align-items:center}}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,153,58,.15);border:1px solid rgba(201,153,58,.3);color:var(--gold-light);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:500;margin-bottom:20px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,52px);color:#fff;line-height:1.15;margin-bottom:20px}
+    .hero h1 span{color:var(--gold-light)}
+    .hero p{color:rgba(255,255,255,.7);font-size:16px;line-height:1.7;margin-bottom:32px}
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-primary{background:var(--gold);color:var(--navy);padding:13px 24px;border-radius:10px;border:0;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;font-family:'DM Sans',sans-serif}
+    .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+    .btn-outline{background:transparent;color:#fff;padding:13px 24px;border-radius:10px;border:1px solid rgba(255,255,255,.3);font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;font-family:'DM Sans',sans-serif}
+    .btn-outline:hover{background:rgba(255,255,255,.1)}
+    .hero-stats{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:28px;backdrop-filter:blur(10px)}
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .stat{text-align:center;padding:16px;border-radius:12px;background:rgba(255,255,255,.05)}
+    .stat .num{font-family:'Playfair Display',serif;font-size:34px;color:var(--gold-light);font-weight:700;line-height:1}
+    .stat .label{font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;text-transform:uppercase;letter-spacing:.5px}
+    .media-placeholder{margin-top:20px;height:110px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.12);border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:13px}
+    /* SECTIONS */
+    section{padding:60px 24px}
+    .section-inner{max-width:1100px;margin:0 auto}
+    .section-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);color:var(--navy);margin-bottom:12px}
+    .section-sub{color:var(--muted);font-size:15px;line-height:1.7;max-width:540px}
+    /* NOTICES */
+    #notices-section{background:#fff}
+    .notices-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:32px}
+    @media(min-width:700px){.notices-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1000px){.notices-grid{grid-template-columns:repeat(3,1fr)}}
+    .notice-card{border-radius:14px;border:1px solid var(--border);padding:20px 20px 20px 24px;background:var(--cream);transition:all .2s;position:relative;overflow:hidden}
+    .notice-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold)}
+    .notice-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+    .notice-card h4{font-size:15px;color:var(--navy);margin-bottom:8px;font-weight:600}
+    .notice-card p{font-size:14px;color:var(--muted);line-height:1.6}
+    .notice-date{font-size:12px;color:var(--gold);margin-top:10px;font-weight:500}
+    /* TIMETABLE */
+    #timetable-section{background:var(--cream)}
+    .class-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 20px}
+    .tab-btn{padding:8px 18px;border-radius:999px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif}
+    .tab-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .tab-btn:hover:not(.active){border-color:var(--blue);color:var(--blue)}
+    .timetable-wrap{overflow-x:auto;border-radius:16px;box-shadow:var(--shadow)}
+    table{width:100%;border-collapse:collapse;background:#fff;min-width:540px}
+    th{background:var(--navy);color:#fff;padding:14px 16px;text-align:left;font-size:13px;font-weight:600;letter-spacing:.3px}
+    td{padding:12px 16px;font-size:14px;border-bottom:1px solid #f0f4f8;color:var(--text)}
+    tr:last-child td{border-bottom:none}
+    tr:nth-child(even) td{background:#fafcff}
+    td:first-child{font-weight:600;color:var(--muted);font-size:13px}
+    .sp{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+    .pm{background:#e8f0ff;color:#2563eb}.ps{background:#e8fff0;color:#16a34a}.pe{background:#fff0e8;color:#c2410c}.pso{background:#f0e8ff;color:#7c3aed}.pc{background:#e8f8ff;color:#0891b2}.pd{background:#fff8e8;color:#b45309}.pev{background:#e8fff8;color:#059669}.pg{background:#fde8ff;color:#9333ea}.ph{background:#ffe8e8;color:#dc2626}
+    .timetable-pane{display:none}
+    .timetable-pane.active{display:block}
+    /* FEATURES */
+    #features-section{background:#fff}
+    .features-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:40px}
+    @media(min-width:600px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.features-grid{grid-template-columns:repeat(3,1fr)}}
+    .feature-card{padding:28px;border-radius:16px;background:var(--cream);border:1px solid var(--border);transition:all .25s}
+    .feature-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+    .feature-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+    .feature-card h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px}
+    .feature-card p{font-size:14px;color:var(--muted);line-height:1.6}
+    /* CONTACT */
+    #contact-section{background:var(--navy)}
+    #contact-section .section-title{color:#fff}
+    #contact-section .section-sub{color:rgba(255,255,255,.6)}
+    .contact-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:36px}
+    @media(min-width:700px){.contact-grid{grid-template-columns:repeat(3,1fr)}}
+    .contact-item{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px}
+    .contact-icon{width:40px;height:40px;background:rgba(201,153,58,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .contact-item .ci-label{font-size:12px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .contact-item .ci-value{font-size:15px;color:#fff;font-weight:500}
+    .contact-item a{color:var(--gold-light);text-decoration:none}
+    footer{background:#060f1e;padding:24px;text-align:center;color:rgba(255,255,255,.3);font-size:13px}
+    footer span{color:var(--gold)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .hero-content>*{animation:fadeUp .6s ease both}
+    .hero-content>*:nth-child(1){animation-delay:.1s}
+    .hero-content>*:nth-child(2){animation-delay:.2s}
+    .hero-content>*:nth-child(3){animation-delay:.3s}
+    .hero-content>*:nth-child(4){animation-delay:.4s}
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="logo.png" alt="Indo Oxford Academy" onerror="this.onerror=null;this.parentNode.innerHTML='<div style=&quot;width:44px;height:44px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-weight:900;color:#0a1f3c;font-size:13px&quot;>IO</div>'"/>
+    </div>
+    <div class="brand-text">
+      <div class="name">Indo Oxford Academy</div>
+      <div class="tagline">Where Curiosity Meets Care — Est. 2012</div>
+    </div>
+    <nav>
+      <a href="#notices-section">Notices</a>
+      <a href="#timetable-section">Timetable</a>
+      <a href="#contact-section">Contact</a>
+      <a href="results.html">📋 Results</a>
+      <a href="auth-ui.html" class="nav-cta">Student Portal →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">⭐ Trusted since 2012 · Nursery – Class 10</div>
+      <h1>Where Young Minds<br/><span>Discover Their</span> Greatness</h1>
+      <p>Indo Oxford Academy offers a nurturing environment with strong academics, personal attention in small batches, and activity-driven learning that shapes confident, curious students.</p>
+      <div class="hero-btns">
+        <a href="auth-ui.html" class="btn-primary">Enter Student Portal</a>
+        <a href="#timetable-section" class="btn-outline">View Timetable</a>
+      </div>
+    </div>
+    <div>
+      <div class="hero-stats">
+        <div class="stats-grid">
+          <div class="stat"><div class="num">12+</div><div class="label">Years of Excellence</div></div>
+          <div class="stat"><div class="num">10</div><div class="label">Classes Nur–10</div></div>
+          <div class="stat"><div class="num">2</div><div class="label">Branches</div></div>
+          <div class="stat"><div class="num">100%</div><div class="label">Dedicated Faculty</div></div>
+        </div>
+        <div style="margin-top:20px;border-radius:14px;overflow:hidden;position:relative;padding-bottom:56.25%;height:0">
+        <iframe src="https://www.youtube.com/embed/byPiWJ2Obpc?autoplay=1&mute=1&loop=1&playlist=byPiWJ2Obpc&controls=1&rel=0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allow="autoplay;encrypted-media" allowfullscreen></iframe>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="notices-section">
+  <div class="section-inner">
+    <div class="section-label">Latest Updates</div>
+    <div class="section-title">School Notices</div>
+    <p class="section-sub">Stay informed with the latest announcements from Indo Oxford Academy.</p>
+    <div class="notices-grid" id="noticesList">
+      <div class="notice-card"><h4>📚 Homework — Divisibility Test</h4><p>All students of Class 5 and 6 to complete exercises from Chapter 3 in their maths notebooks.</p><div class="notice-date">📅 Recent</div></div>
+      <div class="notice-card"><h4>📢 Annual Sports Day</h4><p>Sports Day will be held next Saturday. Students to wear sports uniform. Parents are invited.</p><div class="notice-date">📅 Recent</div></div>
+      <div class="notice-card"><h4>📝 Monthly Test Schedule</h4><p>Monthly tests for Classes 6–8 begin next Monday. Syllabus shared in class by subject teachers.</p><div class="notice-date">📅 Recent</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="timetable-section">
+  <div class="section-inner">
+    <div class="section-label">Academic Schedule</div>
+    <div class="section-title">Class Timetable</div>
+    <p class="section-sub">Weekly schedule for each class — Monday to Friday.</p>
+    <div class="class-tabs" id="classTabs">
+      <button class="tab-btn active" data-class="3">Class 3</button>
+      <button class="tab-btn" data-class="4">Class 4</button>
+      <button class="tab-btn" data-class="5">Class 5</button>
+      <button class="tab-btn" data-class="6">Class 6</button>
+      <button class="tab-btn" data-class="7">Class 7</button>
+      <button class="tab-btn" data-class="8">Class 8</button>
+    </div>
+    <div class="timetable-pane active" id="tt-3"><div class="timetable-wrap"><table>
+      <thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+      <tbody>
+        <tr><td>9:00–9:40</td><td><span class="sp pm">Math</span></td><td><span class="sp pe">English</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pev">EVS</span></td><td><span class="sp pd">Drawing</span></td></tr>
+        <tr><td>9:45–10:25</td><td><span class="sp ph">Hindi</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pe">English</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pg">GK</span></td></tr>
+        <tr><td>10:30–11:10</td><td><span class="sp pev">EVS</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pe">English</span></td><td><span class="sp ph">Hindi</span></td></tr>
+        <tr><td>11:30–12:10</td><td><span class="sp pe">English</span></td><td><span class="sp pev">EVS</span></td><td><span class="sp pg">GK</span></td><td><span class="sp pd">Drawing</span></td><td><span class="sp pm">Math</span></td></tr>
+        <tr><td>12:15–12:55</td><td><span class="sp pd">Drawing</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pe">English</span></td></tr>
+      </tbody>
+    </table></div></div>
+    <div class="timetable-pane" id="tt-4"><div class="timetable-wrap"><table>
+      <thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+      <tbody>
+        <tr><td>9:00–9:40</td><td><span class="sp pe">English</span></td><td><span class="sp pm">Math</span></td><td><span class="sp ps">Science</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pc">Computer</span></td></tr>
+        <tr><td>9:45–10:25</td><td><span class="sp pm">Math</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pev">EVS</span></td><td><span class="sp pm">Math</span></td></tr>
+        <tr><td>10:30–11:10</td><td><span class="sp ph">Hindi</span></td><td><span class="sp ps">Science</span></td><td><span class="sp pe">English</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp ps">Science</span></td></tr>
+        <tr><td>11:30–12:10</td><td><span class="sp pev">EVS</span></td><td><span class="sp pe">English</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pd">Drawing</span></td></tr>
+        <tr><td>12:15–12:55</td><td><span class="sp pc">Computer</span></td><td><span class="sp pd">Drawing</span></td><td><span class="sp pg">GK</span></td><td><span class="sp pe">English</span></td><td><span class="sp ph">Hindi</span></td></tr>
+      </tbody>
+    </table></div></div>
+    <div class="timetable-pane" id="tt-5"><div class="timetable-wrap"><table>
+      <thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+      <tbody>
+        <tr><td>9:00–9:40</td><td><span class="sp ps">Science</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pe">English</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp pso">Social</span></td></tr>
+        <tr><td>9:45–10:25</td><td><span class="sp pm">Math</span></td><td><span class="sp pe">English</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pm">Math</span></td><td><span class="sp ps">Science</span></td></tr>
+        <tr><td>10:30–11:10</td><td><span class="sp ph">Hindi</span></td><td><span class="sp pso">Social</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pe">English</span></td><td><span class="sp pm">Math</span></td></tr>
+        <tr><td>11:30–12:10</td><td><span class="sp pe">English</span></td><td><span class="sp ps">Science</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pg">GK</span></td></tr>
+        <tr><td>12:15–12:55</td><td><span class="sp pd">Drawing</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pso">Social</span></td><td><span class="sp pd">Drawing</span></td><td><span class="sp pe">English</span></td></tr>
+      </tbody>
+    </table></div></div>
+    <div class="timetable-pane" id="tt-6"><div class="timetable-wrap"><table>
+      <thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+      <tbody>
+        <tr><td>9:00–9:40</td><td><span class="sp pm">Math</span></td><td><span class="sp ps">Science</span></td><td><span class="sp pe">English</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp pev">EVS</span></td></tr>
+        <tr><td>9:45–10:25</td><td><span class="sp ps">Science</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pso">Social</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pd">Drawing</span></td></tr>
+        <tr><td>10:30–11:10</td><td><span class="sp pe">English</span></td><td><span class="sp pso">Social</span></td><td><span class="sp pm">Math</span></td><td><span class="sp ps">Science</span></td><td><span class="sp ph">Hindi</span></td></tr>
+        <tr><td>11:30–12:10</td><td><span class="sp ph">Hindi</span></td><td><span class="sp pe">English</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pe">English</span></td><td><span class="sp pm">Math</span></td></tr>
+        <tr><td>12:15–12:55</td><td><span class="sp pso">Social</span></td><td><span class="sp pg">GK</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp pd">Drawing</span></td><td><span class="sp ps">Science</span></td></tr>
+      </tbody>
+    </table></div></div>
+    <div class="timetable-pane" id="tt-7"><div class="timetable-wrap"><table>
+      <thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+      <tbody>
+        <tr><td>9:00–9:40</td><td><span class="sp pm">Math</span></td><td><span class="sp ps">Science</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pe">English</span></td><td><span class="sp pso">Social</span></td></tr>
+        <tr><td>9:45–10:25</td><td><span class="sp pe">English</span></td><td><span class="sp pm">Math</span></td><td><span class="sp ps">Science</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pc">Computer</span></td></tr>
+        <tr><td>10:30–11:10</td><td><span class="sp pso">Social</span></td><td><span class="sp pe">English</span></td><td><span class="sp pm">Math</span></td><td><span class="sp ps">Science</span></td><td><span class="sp pm">Math</span></td></tr>
+        <tr><td>11:30–12:10</td><td><span class="sp ps">Science</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pso">Social</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp pe">English</span></td></tr>
+        <tr><td>12:15–12:55</td><td><span class="sp ph">Hindi</span></td><td><span class="sp pso">Social</span></td><td><span class="sp pe">English</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pd">Drawing</span></td></tr>
+      </tbody>
+    </table></div></div>
+    <div class="timetable-pane" id="tt-8"><div class="timetable-wrap"><table>
+      <thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+      <tbody>
+        <tr><td>9:00–9:40</td><td><span class="sp ps">Science</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pe">English</span></td><td><span class="sp pso">Social</span></td><td><span class="sp ph">Hindi</span></td></tr>
+        <tr><td>9:45–10:25</td><td><span class="sp pm">Math</span></td><td><span class="sp ps">Science</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pe">English</span></td><td><span class="sp ps">Science</span></td></tr>
+        <tr><td>10:30–11:10</td><td><span class="sp pe">English</span></td><td><span class="sp pso">Social</span></td><td><span class="sp ps">Science</span></td><td><span class="sp pm">Math</span></td><td><span class="sp pso">Social</span></td></tr>
+        <tr><td>11:30–12:10</td><td><span class="sp ph">Hindi</span></td><td><span class="sp pe">English</span></td><td><span class="sp pso">Social</span></td><td><span class="sp ps">Science</span></td><td><span class="sp pm">Math</span></td></tr>
+        <tr><td>12:15–12:55</td><td><span class="sp pso">Social</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp ph">Hindi</span></td><td><span class="sp pc">Computer</span></td><td><span class="sp pe">English</span></td></tr>
+      </tbody>
+    </table></div></div>
+  </div>
+</section>
+
+<section id="features-section">
+  <div class="section-inner">
+    <div class="section-label">Why Choose Us</div>
+    <div class="section-title">A School That Truly Cares</div>
+    <p class="section-sub">We don't just teach — we nurture. Every child gets the attention they deserve.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon" style="background:#e8f0ff">📐</div><h3>Strong Academics</h3><p>Rigorous curriculum covering Science, Maths, English, Social Studies, Computer and more — Nursery to Class 10.</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:#e8fff0">👨‍👩‍👧</div><h3>Small Batch Attention</h3><p>Limited class sizes ensure every student gets personal guidance. No child is left behind.</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:#fff0e8">🎨</div><h3>Activity-Driven Learning</h3><p>Drawing, GK, and hands-on activities make learning enjoyable and build real understanding.</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:#f0e8ff">💻</div><h3>Computer Education</h3><p>Dedicated computer classes for Classes 3–8, building digital literacy from an early age.</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:#e8f8ff">🏆</div><h3>Values & Character</h3><p>We build not just smart students but good human beings with strong moral values and discipline.</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:#fff8e8">🌟</div><h3>Two Branches</h3><p>Serving families across Murki and Lohardaga with the same commitment to quality education.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact-section">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--gold-light)">Get In Touch</div>
+    <div class="section-title">Contact Us</div>
+    <p class="section-sub">We'd love to hear from you. Reach out to either of our branches.</p>
+    <div class="contact-grid">
+      <div class="contact-item"><div class="contact-icon">📞</div><div><div class="ci-label">Principal</div><div class="ci-value"><a href="tel:+919128116022">+91 91281 16022</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">📍</div><div><div class="ci-label">Location</div><div class="ci-value"><a href="https://www.google.com/maps?q=23.409633,84.670359" target="_blank">Open in Maps ↗</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">🏫</div><div><div class="ci-label">Branches</div><div class="ci-value">Murki &amp; Lohardaga</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 <span>Indo Oxford Academy</span> — Where Curiosity Meets Care · Est. 2012</footer>
+
+<script type="module">
+  document.getElementById('classTabs').addEventListener('click',e=>{
+    const btn=e.target.closest('.tab-btn');if(!btn)return;
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.timetable-pane').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tt-'+btn.dataset.class).classList.add('active');
+  });
+  // Load live notices from Firestore
+  try{
+    const {initializeApp}=await import('https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js');
+    const {getFirestore,collection,query,orderBy,limit,getDocs}=await import('https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js');
+    const app=initializeApp({apiKey:"AIzaSyAIHBis4Sye1PdkbX1ENZa02_6YtJG874Y",authDomain:"indooxfordacademy-94000.firebaseapp.com",projectId:"indooxfordacademy-94000",storageBucket:"indooxfordacademy-94000.firebasestorage.app",messagingSenderId:"88109643719",appId:"1:88109643719:web:0bf5bb98c213ea06e0cbe2"},'home');
+    const db=getFirestore(app);
+    const snap=await getDocs(query(collection(db,'notices'),orderBy('createdAt','desc'),limit(6)));
+    if(!snap.empty){
+      document.getElementById('noticesList').innerHTML=snap.docs.map(d=>{
+        const x=d.data();const ts=x.createdAt?.toDate?x.createdAt.toDate().toLocaleDateString('en-IN'):'Recent';
+        return`<div class="notice-card"><h4>📢 ${x.title||'Notice'}</h4><p>${x.body||''}</p><div class="notice-date">📅 ${ts}${x.authorName?' · '+x.authorName:''}</div></div>`;
+      }).join('');
+    }
+  }catch(e){}
+</script>
+</body>
+</html>
