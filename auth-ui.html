@@ -1,363 +1,374 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Indo Oxford Academy — Portal</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root{
-      --bg:#f1f6fb;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --blue:#0b63a0;
-      --accent:#e12d2d;
-      --soft:rgba(11,99,160,0.08);
-      --glass: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(246,249,255,0.9));
-    }
-    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    body{margin:0;background:var(--bg);color:#0b2340;-webkit-font-smoothing:antialiased}
-    .site-wrap{max-width:980px;margin:18px auto;padding:18px}
-    /* header */
-    .topbar{display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,var(--blue),#0b4f8a);color:white;padding:14px;border-radius:12px;box-shadow:0 10px 30px rgba(11,63,112,0.12)}
-    .logo{width:56px;height:56px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .logo img{width:100%;height:100%;object-fit:cover}
-    .brand{flex:1}
-    .brand h1{margin:0;font-size:18px;font-weight:700}
-    .brand p{margin:2px 0 0;font-size:12px;opacity:0.95}
-    .menu-btn{background:transparent;border:1px solid rgba(255,255,255,0.18);padding:8px;border-radius:8px;color:white}
-    /* hero card */
-    .card{background:var(--card);border-radius:14px;padding:18px;margin-top:16px;box-shadow:0 12px 30px rgba(9,18,35,0.04)}
-    .hero{display:flex;flex-direction:column;gap:14px}
-    .hero h2{margin:0;font-size:20px;color:var(--blue)}
-    .hero p{margin:0;color:var(--muted);line-height:1.45}
-    .cta-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-    .btn{background:var(--blue);color:white;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
-    .btn.secondary{background:transparent;color:var(--blue);border:1px solid var(--blue)}
-    .pill{background:var(--soft);padding:8px 12px;border-radius:999px;color:var(--blue);font-weight:600}
-    /* grid */
-    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px}
-    @media(min-width:880px){ .grid{grid-template-columns:1fr 380px} .hero{flex:1} }
-    /* notices, timetable, highlight */
-    .section-title{font-weight:700;color:var(--blue);margin-bottom:8px}
-    .notice-list{display:flex;flex-direction:column;gap:8px}
-    .notice{background:#fafcff;border-radius:10px;padding:12px;border-left:4px solid #dbeffd}
-    .notice h4{margin:0;font-size:15px}
-    .notice p{margin:6px 0 0;color:var(--muted);font-size:14px}
-    /* video area */
-    .media-box{border-radius:12px;overflow:hidden;background:var(--card);padding:12px;box-shadow:0 10px 26px rgba(8,20,40,0.04)}
-    .media-controls{display:flex;align-items:center;gap:8px;margin-top:10px}
-    .tiny{font-size:13px;color:var(--muted)}
-    /* auth card */
-    .auth-card{padding:16px;border-radius:12px;background:linear-gradient(180deg,#fff,#fcfdff);box-shadow:0 10px 26px rgba(9,20,40,0.04)}
-    label{display:block;font-weight:600;margin:10px 0 6px;color:#213244}
-    input[type="text"],input[type="email"],input[type="password"]{width:100%;padding:10px;border-radius:8px;border:1px solid #eef5fb;background:transparent}
-    .row{display:flex;gap:10px;align-items:center}
-    .small{padding:8px 10px;border-radius:8px;font-weight:600}
-    .muted{color:var(--muted);font-size:13px}
-    .status{margin-top:10px;font-weight:600;color:var(--blue)}
-    /* footer */
-    .foot{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
-    /* logo upload preview (client-side only) */
-    .logo-upload{display:flex;align-items:center;gap:10px}
-    .logo-preview{width:64px;height:64px;border-radius:10px;background:#f8fafc;display:flex;align-items:center;justify-content:center;border:1px dashed #e7f0f9;overflow:hidden}
-    .logo-preview img{width:100%;height:100%;object-fit:cover}
-    /* responsive spacing */
-    .spacer{height:12px}
+    :root{--navy:#0a1f3c;--blue:#0e5fa8;--gold:#c9993a;--gold-light:#f0c96a;--cream:#fdf8f0;--white:#fff;--text:#1a2e45;--muted:#6b7d92;--border:rgba(14,95,168,0.1);--shadow:0 20px 60px rgba(10,31,60,0.08)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+    /* AUTH SCREEN */
+    #authScreen{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
+    #authScreen::before{content:'';position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(201,153,58,.12) 0%,transparent 70%);pointer-events:none}
+    #authScreen::after{content:'';position:absolute;bottom:-80px;left:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(14,95,168,.25) 0%,transparent 70%);pointer-events:none}
+    .auth-box{background:#fff;border-radius:24px;padding:40px;width:100%;max-width:420px;box-shadow:0 40px 80px rgba(0,0,0,0.3);position:relative;z-index:1;animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both}
+    @keyframes popIn{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    .auth-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+    .auth-logo-img{width:44px;height:44px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .auth-logo-img img{width:100%;height:100%;object-fit:cover}
+    .auth-logo .name{font-family:'Playfair Display',serif;font-size:16px;color:var(--navy);font-weight:700;line-height:1.2}
+    .auth-logo .sub{font-size:11px;color:var(--muted);margin-top:2px}
+    .auth-tabs{display:flex;background:#f3f6fb;border-radius:12px;padding:4px;margin-bottom:24px}
+    .auth-tab{flex:1;padding:9px;text-align:center;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;color:var(--muted);transition:all .2s;border:0;background:transparent;font-family:'DM Sans',sans-serif}
+    .auth-tab.active{background:#fff;color:var(--navy);box-shadow:0 2px 8px rgba(10,31,60,.1)}
+    .auth-form{display:none}
+    .auth-form.active{display:block}
+    .field{margin-bottom:16px}
+    label{display:block;font-size:13px;font-weight:600;color:#243447;margin-bottom:6px}
+    input[type=text],input[type=email],input[type=password]{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid #e6eef6;background:#fafcff;font-size:14px;color:var(--navy);transition:all .2s;font-family:'DM Sans',sans-serif;outline:none}
+    input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(14,95,168,.1)}
+    .btn-main{width:100%;padding:13px;background:var(--navy);color:#fff;border:0;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;margin-top:4px}
+    .btn-main:hover{background:var(--blue);transform:translateY(-1px)}
+    .btn-google{width:100%;padding:12px;background:#fff;color:#333;border:1.5px solid #e0e0e0;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:10px}
+    .btn-google:hover{border-color:#aaa;background:#fafafa}
+    .btn-google svg{width:18px;height:18px}
+    .divider-or{text-align:center;color:var(--muted);font-size:13px;margin:14px 0;position:relative}
+    .divider-or::before,.divider-or::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:#e8eef5}
+    .divider-or::before{left:0}.divider-or::after{right:0}
+    .role-select{display:flex;gap:8px;margin-bottom:16px}
+    .role-opt{flex:1;padding:10px;border-radius:10px;border:1.5px solid #e6eef6;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all .2s;background:#fafcff}
+    .role-opt.active{border-color:var(--navy);background:var(--navy);color:#fff}
+    .status-msg{margin-top:14px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;text-align:center;display:none}
+    .status-msg.show{display:block}
+    .status-msg.ok{background:#e8fff0;color:#16a34a}
+    .status-msg.err{background:#ffe8e8;color:#dc2626}
+    .status-msg.info{background:#e8f0ff;color:#2563eb}
+    .back-link{display:block;text-align:center;margin-top:20px;color:var(--muted);font-size:13px;text-decoration:none}
+    .back-link:hover{color:var(--navy)}
+    /* DASHBOARD */
+    #dashboard{display:none}
+    .db-header{background:var(--navy);padding:0 24px;height:64px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+    .db-logo{width:38px;height:38px;border-radius:8px;background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .db-logo img{width:100%;height:100%;object-fit:cover}
+    .db-brand{font-family:'Playfair Display',serif;font-size:16px;color:#fff;font-weight:700}
+    .db-nav{margin-left:auto;display:flex;gap:8px;align-items:center}
+    .db-nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;font-weight:500;padding:7px 12px;border-radius:8px;cursor:pointer;transition:all .2s;border:0;background:transparent;font-family:'DM Sans',sans-serif}
+    .db-nav a:hover,.db-nav a.active{background:rgba(255,255,255,.12);color:#fff}
+    .btn-logout{background:rgba(255,255,255,.1)!important;color:rgba(255,255,255,.85)!important;border:1px solid rgba(255,255,255,.15)!important}
+    .db-body{max-width:1100px;margin:32px auto;padding:0 24px}
+    /* Welcome banner */
+    .welcome-banner{background:var(--navy);border-radius:20px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px;position:relative;overflow:hidden}
+    .welcome-banner::after{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(201,153,58,.2) 0%,transparent 70%);pointer-events:none}
+    .welcome-banner .greeting{font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:6px}
+    .welcome-banner .greeting span{color:var(--gold-light)}
+    .welcome-banner .sub{color:rgba(255,255,255,.6);font-size:14px}
+    .welcome-badge{background:rgba(201,153,58,.2);border:1px solid rgba(201,153,58,.3);color:var(--gold-light);padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600}
+    /* Grid panels */
+    .db-grid{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:700px){.db-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1000px){.db-grid{grid-template-columns:repeat(3,1fr)}}
+    .panel{background:#fff;border-radius:16px;padding:22px;box-shadow:var(--shadow);border:1px solid var(--border)}
+    .panel-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    /* Notices in dashboard */
+    .db-notice{padding:12px 14px 12px 18px;border-radius:10px;background:var(--cream);border-left:3px solid var(--gold);margin-bottom:10px}
+    .db-notice:last-child{margin-bottom:0}
+    .db-notice h5{font-size:14px;color:var(--navy);margin-bottom:4px}
+    .db-notice p{font-size:13px;color:var(--muted)}
+    /* Timetable in dashboard */
+    .today-tt{display:flex;flex-direction:column;gap:8px}
+    .tt-slot{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;background:#f8faff}
+    .tt-time{font-size:11px;font-weight:700;color:var(--muted);width:80px;flex-shrink:0}
+    .tt-subj{font-size:14px;font-weight:600;color:var(--navy)}
+    /* Quick links */
+    .quick-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .ql-btn{padding:14px;border-radius:12px;border:1px solid var(--border);background:var(--cream);text-align:center;cursor:pointer;transition:all .2s;text-decoration:none;display:block}
+    .ql-btn:hover{box-shadow:var(--shadow);transform:translateY(-2px);background:#fff}
+    .ql-btn .ql-icon{font-size:24px;margin-bottom:6px}
+    .ql-btn .ql-label{font-size:12px;font-weight:600;color:var(--navy)}
+    /* Teacher admin panel in dashboard */
+    .teacher-only{display:none}
+    .teacher-only.show{display:block}
+    .add-notice-form .field{margin-bottom:12px}
+    textarea{width:100%;padding:12px;border-radius:10px;border:1.5px solid #e6eef6;background:#fafcff;font-size:14px;font-family:'DM Sans',sans-serif;resize:vertical;outline:none}
+    textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(14,95,168,.1)}
+    .btn-gold{background:var(--gold);color:var(--navy);border:0;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+    .btn-gold:hover{background:var(--gold-light)}
+    /* loading spinner */
+    .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
-  <div class="site-wrap">
-    <!-- HEADER -->
-    <div class="topbar">
-      <div class="logo" id="logoWrap">
-        <!-- default small placeholder; replace by uploading logo.png into repo/assets/logo.png -->
-        <img id="siteLogo" src="assets/logo.png" alt="Indo Oxford Academy logo" onerror="this.style.opacity=0.6;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2256%22 height=%2256%22><rect width=%2256%22 height=%2256%22 fill=%22%23ffffff%22 rx=%2210%22/><text x=%2228%22 y=%2232%22 font-size=%2210%22 font-family=%22Inter,%20Arial%22 text-anchor=%22middle%22 fill=%22%230b4f8a%22>IO</text></svg>';">
-      </div>
-      <div class="brand">
-        <h1>Indo Oxford Academy</h1>
-        <p>Where curiosity meets care — Estd. 2012</p>
+
+<!-- AUTH SCREEN -->
+<div id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-img">
+        <img src="logo.png" alt="IOA" onerror="this.onerror=null;this.parentNode.innerHTML='<span style=\'font-family:Playfair Display,serif;font-weight:900;color:#f0c96a;font-size:14px\'>IO</span>'"/>
       </div>
       <div>
-        <button class="menu-btn" id="openMenu">☰</button>
+        <div class="name">Indo Oxford Academy</div>
+        <div class="sub">Student &amp; Teacher Portal</div>
       </div>
     </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('signin')">Sign In</button>
+      <button class="auth-tab" onclick="switchTab('signup')">Create Account</button>
+    </div>
 
-    <!-- HERO + SIDEBAR GRID -->
-    <div class="grid">
-      <div>
-        <div class="card hero">
-          <div class="hero-content">
-            <h2>Indo Oxford Academy</h2>
-            <p>A nurturing school for Nursery to Class 10 — strong academics, values, and creativity. Blended learning with personal attention and experienced teachers.</p>
-            <div class="cta-row">
-              <button class="btn" id="portalBtn">Student Portal</button>
-              <button class="btn secondary" id="enrollBtn">Enroll Now</button>
-              <div class="pill">Small batches • Personal attention</div>
-            </div>
-          </div>
+    <!-- SIGN IN -->
+    <div id="signinForm" class="auth-form active">
+      <div class="field"><label>Email Address</label><input id="siEmail" type="email" placeholder="your@email.com" autocomplete="email"/></div>
+      <div class="field"><label>Password</label><input id="siPass" type="password" placeholder="Your password" autocomplete="current-password"/></div>
+      <button class="btn-main" id="btnSignin" onclick="doSignIn()">Sign In</button>
+      <div class="divider-or">or</div>
+      <button class="btn-google" onclick="doGoogle()">
+        <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Continue with Google
+      </button>
+      <div id="siStatus" class="status-msg"></div>
+    </div>
 
-          <div class="spacer"></div>
-
-          <!-- MEDIA (teacher-only video embed) -->
-          <div class="media-box" id="mediaBox" role="region" aria-label="School highlights">
-            <!-- thumbnail shown by default -->
-            <div id="thumbWrap" style="text-align:center;">
-              <img id="ytThumb" src="https://img.youtube.com/vi/byPiWJ2Obpc/hqdefault.jpg" alt="School highlight thumbnail" style="width:100%;max-width:720px;border-radius:10px;box-shadow:0 8px 18px rgba(8,20,40,0.06);cursor:pointer" />
-              <div class="tiny muted" style="margin-top:8px">Raw material as a fresh child in Indo Oxford Academy — Watch preview</div>
-              <div style="margin-top:8px">
-                <button class="btn small" id="playRequest">Teacher view (play)</button>
-                <a class="btn secondary small" id="openYt" href="https://youtu.be/byPiWJ2Obpc" target="_blank" rel="noopener">Open on YouTube</a>
-              </div>
-            </div>
-
-            <!-- hidden iframe for teacher -->
-            <div id="videoWrap" style="display:none;">
-              <iframe id="ytFrame" width="100%" height="360" src="" title="School highlights" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:10px;overflow:hidden;"></iframe>
-              <div class="media-controls">
-                <div class="tiny muted">Only teachers can play the embedded video here — others see the preview.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="spacer"></div>
-
-          <!-- Notices -->
-          <div class="card">
-            <div class="section-title">Notices</div>
-            <div id="noticeArea" class="notice-list">
-              <!-- notices will be injected by JS (simulate if not connected) -->
-              <div class="notice">
-                <h4>Loading...</h4>
-                <p class="muted">Please wait while notices load.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="spacer"></div>
-
-          <!-- Timetable (static sample) -->
-          <div class="card">
-            <div class="section-title">Sample Class Timetable — Class 6 (Mon–Fri)</div>
-            <table style="width:100%;border-collapse:collapse">
-              <thead>
-                <tr style="text-align:left;color:var(--muted)"><th style="padding:8px">Time</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th></tr>
-              </thead>
-              <tbody>
-                <tr><td style="padding:8px">9:00 - 9:40</td><td>Math</td><td>Science</td><td>English</td><td>Computer</td><td>EVS</td></tr>
-                <tr><td style="padding:8px">9:45 - 10:25</td><td>Science</td><td>Math</td><td>Social</td><td>Math</td><td>Drawing</td></tr>
-              </tbody>
-            </table>
-          </div>
+    <!-- SIGN UP -->
+    <div id="signupForm" class="auth-form">
+      <div class="field"><label>Full Name</label><input id="suName" type="text" placeholder="Your full name"/></div>
+      <div class="field"><label>Email Address</label><input id="suEmail" type="email" placeholder="your@email.com"/></div>
+      <div class="field"><label>Password</label><input id="suPass" type="password" placeholder="Min 6 characters"/></div>
+      <div class="field"><label>I am a:</label>
+        <div class="role-select">
+          <div class="role-opt active" id="roleStudent" onclick="selectRole('student')">🎒 Student</div>
+          <div class="role-opt" id="roleTeacher" onclick="selectRole('teacher')">👩‍🏫 Teacher</div>
         </div>
       </div>
+      <button class="btn-main" id="btnSignup" onclick="doSignUp()">Create Account</button>
+      <div id="suStatus" class="status-msg"></div>
+    </div>
 
-      <!-- RIGHT COLUMN: auth + contact -->
-      <div>
-        <div class="card auth-card">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div>
-              <strong>Portal Login</strong>
-              <div class="muted" style="font-size:13px">Sign in to access portal & resources</div>
-            </div>
-            <div class="logo-upload">
-              <div class="logo-preview" title="Preview logo">
-                <img id="previewLogo" src="assets/logo.png" alt="logo preview" onerror="this.src=''">
-              </div>
-              <div style="font-size:12px;color:var(--muted)">Logo: upload to repo → assets/logo.png</div>
-            </div>
-          </div>
+    <a href="index.html" class="back-link">← Back to school website</a>
+  </div>
+</div>
 
-          <label>Full name</label>
-          <input id="fullname" type="text" placeholder="Full name (for signup)">
-
-          <label>Email</label>
-          <input id="email" type="email" placeholder="email@example.com">
-
-          <label>Password</label>
-          <input id="password" type="password" placeholder="Password (min 6)">
-
-          <div style="margin-top:12px" class="row">
-            <button class="btn" id="btnSignup">Sign up (student)</button>
-            <button class="btn secondary" id="btnSignupTeacher">Sign up (teacher)</button>
-          </div>
-
-          <hr style="margin:14px 0;border:none;border-top:1px solid #f0f5fb">
-
-          <label>Sign-in email</label>
-          <input id="signinEmail" type="email" placeholder="Your email">
-
-          <label>Sign-in password</label>
-          <input id="signinPassword" type="password" placeholder="Your password">
-
-          <div style="margin-top:12px" class="row">
-            <button class="btn" id="btnSignin">Sign in</button>
-            <button class="btn secondary" id="btnGoogle">Sign in with Google</button>
-          </div>
-
-          <div id="status" class="status">Not signed in</div>
-          <div id="consoleLog" class="muted" style="margin-top:8px"></div>
-        </div>
-
-        <div style="height:14px"></div>
-
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div class="section-title">Contact</div>
-              <div class="muted">Principal: +91 9128116022</div>
-            </div>
-            <div style="text-align:right">
-              <a class="tiny" href="https://www.youtube.com/@IndoOxfordLearning" target="_blank" rel="noopener">YouTube</a><br>
-              <a class="tiny" href="https://www.google.com/maps?q=23.409633,84.670359" target="_blank" rel="noopener">Maps</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="foot muted" style="margin-top:12px">© Indo Oxford Academy — built with care.</div>
-      </div>
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="db-header">
+    <div class="db-logo">
+      <img src="logo.png" alt="IOA" onerror="this.onerror=null;this.parentNode.innerHTML='<span style=\'font-family:Playfair Display,serif;font-weight:900;color:#f0c96a;font-size:11px\'>IO</span>'"/>
+    </div>
+    <div class="db-brand">Indo Oxford Academy</div>
+    <div class="db-nav">
+      <a href="index.html">🏠 Home</a>
+      <a href="#" id="adminLink" class="teacher-only" onclick="scrollToAdmin()">📋 Admin</a>
+      <a href="#" class="btn-logout" onclick="doLogout()">Sign Out</a>
     </div>
   </div>
 
-  <!-- Firebase modular SDKs -->
-  <script type="module">
-    // ----- Replace with your firebaseConfig if different -----
-    const firebaseConfig = {
-      apiKey: "AIzaSyAIHBis4Sye1PdkbX1ENZa02_6YtJG874Y",
-      authDomain: "indooxfordacademy-94000.firebaseapp.com",
-      projectId: "indooxfordacademy-94000",
-      storageBucket: "indooxfordacademy-94000.firebasestorage.app",
-      messagingSenderId: "88109643719",
-      appId: "1:88109643719:web:0bf5bb98c213ea06e0cbe2",
-      measurementId: "G-C95MDD3MGN"
-    };
-    // -------------------------------------------------------
+  <div class="db-body">
+    <div class="welcome-banner">
+      <div>
+        <div class="greeting">Welcome back, <span id="dbName">Student</span>!</div>
+        <div class="sub" id="dbSub">Indo Oxford Academy — Student Dashboard</div>
+      </div>
+      <div class="welcome-badge" id="dbBadge">🎒 Student</div>
+    </div>
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    <div class="db-grid">
+      <!-- Notices -->
+      <div class="panel">
+        <div class="panel-title">📢 Latest Notices</div>
+        <div id="dbNotices"><div style="color:var(--muted);font-size:14px">Loading notices...</div></div>
+      </div>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+      <!-- Today's Timetable -->
+      <div class="panel">
+        <div class="panel-title">📅 Today's Schedule</div>
+        <div class="today-tt" id="todayTT"></div>
+      </div>
 
-    // UI refs
-    const statusEl = document.getElementById('status');
-    const logEl = document.getElementById('consoleLog');
-    const noticeArea = document.getElementById('noticeArea');
+      <!-- Quick Links -->
+      <div class="panel">
+        <div class="panel-title">⚡ Quick Links</div>
+        <div class="quick-links">
+          <a href="index.html#timetable-section" class="ql-btn"><div class="ql-icon">🗓️</div><div class="ql-label">Full Timetable</div></a>
+          <a href="index.html#notices-section" class="ql-btn"><div class="ql-icon">📌</div><div class="ql-label">All Notices</div></a>
+          <a href="https://www.youtube.com/@indooxfordlearning9266" target="_blank" class="ql-btn"><div class="ql-icon">▶️</div><div class="ql-label">YouTube</div></a>
+          <a href="https://www.google.com/maps?q=23.409633,84.670359" target="_blank" class="ql-btn"><div class="ql-icon">📍</div><div class="ql-label">School Map</div></a>
+        </div>
+      </div>
 
-    function setStatus(t){ statusEl.textContent = t; }
-    function log(...a){ logEl.textContent = String(a.join(' ')); console.log(...a); }
+      <!-- Teacher: Add Notice -->
+      <div class="panel teacher-only" id="addNoticePanel">
+        <div class="panel-title">✍️ Post a Notice</div>
+        <div class="add-notice-form">
+          <div class="field"><label>Notice Title</label><input id="ntTitle" type="text" placeholder="e.g. Homework — Chapter 4"/></div>
+          <div class="field"><label>Notice Body</label><textarea id="ntBody" rows="4" placeholder="Write the announcement here..."></textarea></div>
+          <button class="btn-gold" onclick="postNotice()">📢 Post Notice</button>
+          <div id="ntStatus" class="status-msg"></div>
+        </div>
+      </div>
 
-    // --- auth + user creation ---
-    async function signUpAs(role){
-      try{
-        setStatus('Creating account...');
-        const name = document.getElementById('fullname').value.trim() || 'NoName';
-        const email = document.getElementById('email').value.trim();
-        const pwd = document.getElementById('password').value;
-        if(!email || !pwd){ setStatus('Enter email & password'); return; }
-        const userCred = await createUserWithEmailAndPassword(auth, email, pwd);
-        const uid = userCred.user.uid;
-        await setDoc(doc(db, 'users', uid), { name, email, role, createdAt: new Date().toISOString() });
-        setStatus('Account created — ' + name);
-        log('user created', uid, role);
-      }catch(e){ console.error(e); setStatus('Error: ' + (e.message || e)); }
-    }
+      <!-- Live Notices list for teacher -->
+      <div class="panel teacher-only" id="liveNoticesPanel">
+        <div class="panel-title">📋 All Posted Notices</div>
+        <div id="liveNoticesList" style="font-size:14px;color:var(--muted)">Loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    async function signIn(){
-      try{
-        setStatus('Signing in...');
-        const email = document.getElementById('signinEmail').value.trim();
-        const pwd = document.getElementById('signinPassword').value;
-        if(!email || !pwd){ setStatus('Enter email & password'); return; }
-        await signInWithEmailAndPassword(auth, email, pwd);
-        setStatus('Signed in');
-      }catch(e){ console.error(e); setStatus('Error: ' + (e.message || e)); }
-    }
+<script type="module">
+const FC = {
+  apiKey:"AIzaSyAIHBis4Sye1PdkbX1ENZa02_6YtJG874Y",
+  authDomain:"indooxfordacademy-94000.firebaseapp.com",
+  projectId:"indooxfordacademy-94000",
+  storageBucket:"indooxfordacademy-94000.firebasestorage.app",
+  messagingSenderId:"88109643719",
+  appId:"1:88109643719:web:0bf5bb98c213ea06e0cbe2"
+};
 
-    async function googleSign(){
-      try{
-        const provider = new GoogleAuthProvider();
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        const udoc = await getDoc(doc(db, 'users', user.uid));
-        if(!udoc.exists()){
-          await setDoc(doc(db, 'users', user.uid), { name: user.displayName || '', email: user.email, role: 'student' });
-        }
-        setStatus('Signed in with Google: ' + user.email);
-      }catch(e){ console.error(e); setStatus('Error: ' + (e.message || e)); }
-    }
+const {initializeApp} = await import('https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js');
+const {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut} = await import('https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js');
+const {getFirestore,doc,setDoc,getDoc,collection,addDoc,query,orderBy,limit,getDocs,serverTimestamp} = await import('https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js');
 
-    // Attach buttons
-    document.getElementById('btnSignup').addEventListener('click', ()=> signUpAs('student'));
-    document.getElementById('btnSignupTeacher').addEventListener('click', ()=> signUpAs('teacher'));
-    document.getElementById('btnSignin').addEventListener('click', signIn);
-    document.getElementById('btnGoogle').addEventListener('click', googleSign);
+const app = initializeApp(FC, 'portal');
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-    // --- video logic (teacher only) ---
-    const YT_ID = 'byPiWJ2Obpc'; // <-- change if needed
-    function showVideoForTeacher(){
-      document.getElementById('thumbWrap').style.display = 'none';
-      document.getElementById('videoWrap').style.display = 'block';
-      document.getElementById('ytFrame').src = `https://www.youtube.com/embed/${YT_ID}?rel=0&autoplay=1`;
-    }
+let selectedRole = 'student';
 
-    // click on thumbnail -> open youtube or request teacher view
-    document.getElementById('ytThumb').addEventListener('click', ()=> window.open(`https://youtu.be/${YT_ID}`,'_blank'));
-    document.getElementById('playRequest').addEventListener('click', ()=>{
-      alert('If you are a teacher, please sign in with your teacher account to view embedded video here.');
-    });
+window.selectRole = (r) => {
+  selectedRole = r;
+  document.getElementById('roleStudent').classList.toggle('active', r==='student');
+  document.getElementById('roleTeacher').classList.toggle('active', r==='teacher');
+};
 
-    // --- load simple sample notices (simulated) ---
-    function renderNotices(items){
-      noticeArea.innerHTML = '';
-      if(!items || items.length===0){
-        noticeArea.innerHTML = `<div class="notice"><h4>No notices</h4><p class="muted">No recent notices have been published.</p></div>`;
-        return;
-      }
-      items.forEach(n=>{
-        const el = document.createElement('div');
-        el.className='notice';
-        el.innerHTML = `<h4>${n.title}</h4><p class="muted">${n.body}</p>`;
-        noticeArea.appendChild(el);
-      });
-    }
-    // sample fallback
-    const sampleNotices = [
-      { title: 'Divisibility Test', body: 'Make home work' },
-      { title: 'Yess', body: 'Hii' }
-    ];
-    renderNotices(sampleNotices);
+window.switchTab = (tab) => {
+  document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',i===(tab==='signin'?0:1)));
+  document.getElementById('signinForm').classList.toggle('active',tab==='signin');
+  document.getElementById('signupForm').classList.toggle('active',tab==='signup');
+};
 
-    // --- watch auth state for teacher role and show video if teacher ---
-    onAuthStateChanged(auth, async (user)=>{
-      if(user){
-        try{
-          const udoc = await getDoc(doc(db, 'users', user.uid));
-          const role = udoc.exists()? udoc.data().role : 'student';
-          setStatus(`Hello ${udoc.exists()?udoc.data().name:user.email} — role: ${role}`);
-          if(role === 'teacher') showVideoForTeacher();
-        }catch(e){ console.error(e); setStatus('Signed in'); }
-      } else {
-        setStatus('Not signed in');
-      }
-    });
+function showMsg(id,msg,type){
+  const el=document.getElementById(id);
+  el.textContent=msg;el.className='status-msg show '+type;
+}
 
-    // Expose for debugging
-    window._auth = auth;
-    window._db = db;
-    console.log('Portal UI loaded');
-  </script>
+window.doSignIn = async () => {
+  const btn=document.getElementById('btnSignin');
+  btn.innerHTML='<span class="spinner"></span>Signing in...';btn.disabled=true;
+  try{
+    await signInWithEmailAndPassword(auth,document.getElementById('siEmail').value.trim(),document.getElementById('siPass').value);
+  }catch(e){
+    showMsg('siStatus',e.code==='auth/invalid-credential'?'Wrong email or password. Try again.':e.message,'err');
+    btn.textContent='Sign In';btn.disabled=false;
+  }
+};
 
-  <!-- non-module fallback debug -->
-  <script>
-    // small fallback: make portal and enroll buttons open placeholder links
-    document.getElementById('portalBtn').addEventListener('click', ()=> window.open('./admin.html','_self'));
-    document.getElementById('enrollBtn').addEventListener('click', ()=> alert('To enroll: call +91 9128116022 or visit school.'));
-  </script>
+window.doSignUp = async () => {
+  const btn=document.getElementById('btnSignup');
+  btn.innerHTML='<span class="spinner"></span>Creating account...';btn.disabled=true;
+  try{
+    const name=document.getElementById('suName').value.trim()||'User';
+    const email=document.getElementById('suEmail').value.trim();
+    const pass=document.getElementById('suPass').value;
+    if(!email||!pass){showMsg('suStatus','Please fill all fields.','err');btn.textContent='Create Account';btn.disabled=false;return;}
+    const cred=await createUserWithEmailAndPassword(auth,email,pass);
+    await setDoc(doc(db,'users',cred.user.uid),{name,email,role:selectedRole,createdAt:new Date().toISOString()});
+    showMsg('suStatus','Account created! Signing you in...','ok');
+  }catch(e){
+    showMsg('suStatus',e.message,'err');
+    btn.textContent='Create Account';btn.disabled=false;
+  }
+};
+
+window.doGoogle = async () => {
+  try{
+    const res=await signInWithPopup(auth,new GoogleAuthProvider());
+    const ref=doc(db,'users',res.user.uid);
+    const snap=await getDoc(ref);
+    if(!snap.exists())await setDoc(ref,{name:res.user.displayName||'',email:res.user.email,role:'student',createdAt:new Date().toISOString()});
+  }catch(e){showMsg('siStatus',e.message,'err');}
+};
+
+window.doLogout = async () => { await signOut(auth); };
+
+const ttData = {
+  0:[],// Sunday
+  1:[{t:'9:00–9:40',s:'Math'},{t:'9:45–10:25',s:'Hindi'},{t:'10:30–11:10',s:'EVS'},{t:'11:30–12:10',s:'English'},{t:'12:15–12:55',s:'Drawing'}],
+  2:[{t:'9:00–9:40',s:'English'},{t:'9:45–10:25',s:'Math'},{t:'10:30–11:10',s:'Science'},{t:'11:30–12:10',s:'Social'},{t:'12:15–12:55',s:'GK'}],
+  3:[{t:'9:00–9:40',s:'Hindi'},{t:'9:45–10:25',s:'English'},{t:'10:30–11:10',s:'Math'},{t:'11:30–12:10',s:'Hindi'},{t:'12:15–12:55',s:'Computer'}],
+  4:[{t:'9:00–9:40',s:'Computer'},{t:'9:45–10:25',s:'Math'},{t:'10:30–11:10',s:'English'},{t:'11:30–12:10',s:'Drawing'},{t:'12:15–12:55',s:'Hindi'}],
+  5:[{t:'9:00–9:40',s:'Social'},{t:'9:45–10:25',s:'Science'},{t:'10:30–11:10',s:'Hindi'},{t:'11:30–12:10',s:'Math'},{t:'12:15–12:55',s:'English'}],
+  6:[]// Saturday
+};
+
+const subjColors={'Math':'#e8f0ff;color:#2563eb','Hindi':'#ffe8e8;color:#dc2626','English':'#fff0e8;color:#c2410c','Science':'#e8fff0;color:#16a34a','Social':'#f0e8ff;color:#7c3aed','Computer':'#e8f8ff;color:#0891b2','EVS':'#e8fff8;color:#059669','GK':'#fde8ff;color:#9333ea','Drawing':'#fff8e8;color:#b45309'};
+
+function loadTodayTT(){
+  const day=new Date().getDay();
+  const slots=ttData[day]||[];
+  const el=document.getElementById('todayTT');
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  if(!slots.length){el.innerHTML=`<div style="color:var(--muted);font-size:14px">No school today (${days[day]})! 🎉</div>`;return;}
+  el.innerHTML=slots.map(s=>{const c=subjColors[s.s]||'#f0f4f8;color:#333';return`<div class="tt-slot"><div class="tt-time">${s.t}</div><div style="display:inline-block;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:700;background:${c.split(';')[0].replace('background:','')};color:${c.split('color:')[1]}">${s.s}</div></div>`}).join('');
+}
+
+async function loadNotices(targetEl,maxN=4){
+  try{
+    const snap=await getDocs(query(collection(db,'notices'),orderBy('createdAt','desc'),limit(maxN)));
+    if(snap.empty){document.getElementById(targetEl).innerHTML='<div style="color:var(--muted);font-size:14px">No notices yet.</div>';return;}
+    document.getElementById(targetEl).innerHTML=snap.docs.map(d=>{
+      const x=d.data();const ts=x.createdAt?.toDate?x.createdAt.toDate().toLocaleDateString('en-IN'):'Recent';
+      return`<div class="db-notice"><h5>${x.title||'Notice'}</h5><p>${x.body||''} <span style="color:var(--gold);font-size:11px;margin-top:4px;display:block">📅 ${ts}${x.authorName?' · '+x.authorName:''}</span></p></div>`;
+    }).join('');
+  }catch(e){document.getElementById(targetEl).innerHTML='<div style="color:var(--muted);font-size:13px">Could not load notices.</div>';}
+}
+
+window.postNotice = async () => {
+  const btn=document.querySelector('#addNoticePanel .btn-gold');
+  const title=document.getElementById('ntTitle').value.trim();
+  const body=document.getElementById('ntBody').value.trim();
+  if(!title||!body){showMsg('ntStatus','Please fill both fields.','err');return;}
+  btn.innerHTML='<span class="spinner"></span>Posting...';btn.disabled=true;
+  try{
+    const u=auth.currentUser;
+    const usnap=await getDoc(doc(db,'users',u.uid));
+    const authorName=usnap.exists()?usnap.data().name:u.email;
+    await addDoc(collection(db,'notices'),{title,body,author:u.uid,authorName,createdAt:serverTimestamp()});
+    document.getElementById('ntTitle').value='';document.getElementById('ntBody').value='';
+    showMsg('ntStatus','Notice posted successfully!','ok');
+    loadNotices('liveNoticesList',10);
+    loadNotices('dbNotices',4);
+  }catch(e){showMsg('ntStatus',e.message,'err');}
+  btn.textContent='📢 Post Notice';btn.disabled=false;
+};
+
+window.scrollToAdmin=()=>{document.getElementById('addNoticePanel').scrollIntoView({behavior:'smooth'})};
+
+onAuthStateChanged(auth, async (user) => {
+  if(!user){
+    document.getElementById('authScreen').style.display='flex';
+    document.getElementById('dashboard').style.display='none';
+    document.getElementById('btnSignin').textContent='Sign In';document.getElementById('btnSignin').disabled=false;
+    document.getElementById('btnSignup').textContent='Create Account';document.getElementById('btnSignup').disabled=false;
+    return;
+  }
+  document.getElementById('authScreen').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  const usnap=await getDoc(doc(db,'users',user.uid));
+  const udata=usnap.exists()?usnap.data():{name:user.displayName||user.email,role:'student'};
+  document.getElementById('dbName').textContent=udata.name||user.displayName||'Friend';
+  const isTeacher=udata.role==='teacher';
+  document.getElementById('dbBadge').textContent=isTeacher?'👩‍🏫 Teacher':'🎒 Student';
+  document.getElementById('dbSub').textContent=isTeacher?'Teacher Dashboard — Indo Oxford Academy':'Student Dashboard — Indo Oxford Academy';
+  document.querySelectorAll('.teacher-only').forEach(el=>el.classList.toggle('show',isTeacher));
+  loadTodayTT();
+  loadNotices('dbNotices',4);
+  if(isTeacher)loadNotices('liveNoticesList',10);
+});
+</script>
 </body>
 </html>
