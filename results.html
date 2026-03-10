@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>IOA — Results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#0a1f3c;--blue:#0e5fa8;--gold:#c9993a;--gold-light:#f0c96a;--cream:#fdf8f0;--white:#fff;--text:#1a2e45;--muted:#6b7d92;--border:rgba(14,95,168,0.1);--shadow:0 20px 60px rgba(10,31,60,0.08);--green:#16a34a;--red:#dc2626;--orange:#ea580c}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+    /* HEADER */
+    .hdr{background:var(--navy);padding:0 24px;height:64px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+    .hdr-logo{width:38px;height:38px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+    .hdr-logo img{width:100%;height:100%;object-fit:cover}
+    .hdr-brand{font-family:'Playfair Display',serif;font-size:16px;color:#fff;font-weight:700}
+    .hdr-tag{background:rgba(201,153,58,.2);border:1px solid rgba(201,153,58,.3);color:var(--gold-light);padding:5px 12px;border-radius:999px;font-size:12px;font-weight:600;margin-left:6px}
+    .hdr-nav{margin-left:auto;display:flex;gap:8px}
+    .hdr-nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;font-weight:500;padding:7px 12px;border-radius:8px;transition:all .2s;background:rgba(255,255,255,.08)}
+    .hdr-nav a:hover{background:rgba(255,255,255,.15);color:#fff}
+    /* BODY */
+    .body{max-width:1000px;margin:32px auto;padding:0 20px}
+    /* TABS */
+    .role-tabs{display:flex;background:#fff;border-radius:16px;padding:6px;gap:6px;margin-bottom:28px;box-shadow:var(--shadow);border:1px solid var(--border)}
+    .role-tab{flex:1;padding:12px;text-align:center;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;color:var(--muted);transition:all .25s;border:0;background:transparent;font-family:'DM Sans',sans-serif}
+    .role-tab.active{background:var(--navy);color:#fff;box-shadow:0 4px 14px rgba(10,31,60,.2)}
+    /* PANEL */
+    .panel{background:#fff;border-radius:20px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--border);display:none}
+    .panel.active{display:block}
+    .panel-hd{margin-bottom:24px}
+    .panel-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:6px}
+    .panel-sub{font-size:14px;color:var(--muted)}
+    /* FORM ELEMENTS */
+    .form-grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:600px){.form-grid{grid-template-columns:1fr 1fr}}
+    @media(min-width:900px){.form-grid{grid-template-columns:1fr 1fr 1fr}}
+    .field label{display:block;font-size:13px;font-weight:600;color:#243447;margin-bottom:6px}
+    select,input[type=text],input[type=number]{width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid #e6eef6;background:#fafcff;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;color:var(--navy);transition:all .2s;appearance:none}
+    select:focus,input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(14,95,168,.1)}
+    .btn{padding:12px 24px;border-radius:12px;border:0;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+    .btn-navy{background:var(--navy);color:#fff}
+    .btn-navy:hover{background:var(--blue);transform:translateY(-1px)}
+    .btn-gold{background:var(--gold);color:var(--navy)}
+    .btn-gold:hover{background:var(--gold-light)}
+    .btn-sm{padding:8px 16px;font-size:13px;border-radius:8px}
+    .btn-row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;align-items:center}
+    /* STATUS */
+    .msg{padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;margin-top:14px;display:none}
+    .msg.show{display:block}
+    .msg.ok{background:#e8fff0;color:var(--green)}
+    .msg.err{background:#ffe8e8;color:var(--red)}
+    .msg.info{background:#e8f0ff;color:var(--blue)}
+    /* MARKS ENTRY TABLE */
+    .marks-table-wrap{overflow-x:auto;margin-top:20px;border-radius:14px;border:1px solid var(--border)}
+    .marks-table{width:100%;border-collapse:collapse;min-width:500px}
+    .marks-table th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;font-size:13px;font-weight:600}
+    .marks-table td{padding:10px 14px;border-bottom:1px solid #f0f4f8;font-size:14px}
+    .marks-table tr:last-child td{border-bottom:none}
+    .marks-table tr:nth-child(even) td{background:#fafcff}
+    .marks-table input[type=number]{width:80px;padding:7px 10px;border-radius:8px;border:1.5px solid #e6eef6;background:#fff;font-size:14px;text-align:center;font-family:'DM Sans',sans-serif;outline:none}
+    .marks-table input[type=number]:focus{border-color:var(--blue)}
+    /* MARKSHEET VIEW */
+    .marksheet{background:#fff;border-radius:20px;padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}
+    .ms-header{display:flex;align-items:center;gap:16px;padding-bottom:20px;border-bottom:2px solid var(--cream);margin-bottom:24px}
+    .ms-logo{width:56px;height:56px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .ms-logo img{width:100%;height:100%;object-fit:cover}
+    .ms-school{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);font-weight:700}
+    .ms-school-sub{font-size:12px;color:var(--muted);margin-top:3px}
+    .ms-title{text-align:center;margin-bottom:24px}
+    .ms-title h2{font-family:'Playfair Display',serif;font-size:20px;color:var(--navy)}
+    .ms-title p{font-size:13px;color:var(--muted);margin-top:4px}
+    .ms-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;background:var(--cream);border-radius:12px;padding:16px}
+    @media(min-width:600px){.ms-info-grid{grid-template-columns:repeat(4,1fr)}}
+    .ms-info-item .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+    .ms-info-item .val{font-size:15px;font-weight:700;color:var(--navy)}
+    .ms-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin-bottom:20px}
+    .ms-table{width:100%;border-collapse:collapse;min-width:400px}
+    .ms-table th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;font-size:13px;font-weight:600}
+    .ms-table td{padding:11px 16px;border-bottom:1px solid #f0f4f8;font-size:14px}
+    .ms-table tr:last-child td{border-bottom:none}
+    .ms-table tr:nth-child(even) td{background:#fafcff}
+    .ms-table .subject-col{font-weight:600;color:var(--navy)}
+    .grade-pill{display:inline-block;padding:3px 12px;border-radius:999px;font-size:12px;font-weight:700}
+    .grade-a{background:#e8fff0;color:var(--green)}
+    .grade-b{background:#e8f0ff;color:#2563eb}
+    .grade-c{background:#fff8e8;color:#b45309}
+    .grade-d{background:#ffe8e8;color:var(--red)}
+    .ms-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+    @media(min-width:500px){.ms-summary{grid-template-columns:repeat(4,1fr)}}
+    .summary-card{text-align:center;padding:16px;border-radius:14px;border:1px solid var(--border)}
+    .summary-card .s-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1}
+    .summary-card .s-lbl{font-size:11px;color:var(--muted);margin-top:5px;text-transform:uppercase;letter-spacing:.5px}
+    .result-stamp{display:inline-block;padding:8px 20px;border-radius:999px;font-size:14px;font-weight:700;margin-top:16px}
+    .stamp-pass{background:#e8fff0;color:var(--green);border:2px solid var(--green)}
+    .stamp-fail{background:#ffe8e8;color:var(--red);border:2px solid var(--red)}
+    .print-btn{background:var(--navy);color:#fff;border:0;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:20px;display:flex;align-items:center;gap:8px}
+    .print-btn:hover{background:var(--blue)}
+    /* LOADING */
+    .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(10,31,60,.15);border-top-color:var(--navy);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    /* STUDENT LIST */
+    .student-card{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:12px;background:var(--cream);border:1px solid var(--border);margin-bottom:10px;transition:all .2s}
+    .student-card:hover{box-shadow:var(--shadow);background:#fff}
+    .student-name{font-weight:600;color:var(--navy);font-size:15px}
+    .student-meta{font-size:12px;color:var(--muted);margin-top:3px}
+    @media print{.hdr,.role-tabs,.btn-row,.print-btn,.no-print{display:none!important}.marksheet{box-shadow:none;border:none;padding:0}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-logo">
+    <img src="logo.png" alt="IOA" onerror="this.onerror=null;this.parentNode.innerHTML='<span style=\'font-family:Playfair Display,serif;font-weight:900;color:#f0c96a;font-size:11px\'>IO</span>'"/>
+  </div>
+  <div class="hdr-brand">Indo Oxford Academy</div>
+  <span class="hdr-tag">Results</span>
+  <div class="hdr-nav">
+    <a href="auth-ui.html">← Dashboard</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+</div>
+
+<div class="body">
+  <!-- ROLE TABS -->
+  <div class="role-tabs no-print">
+    <button class="role-tab active" onclick="switchPanel('student')">🎒 View My Result</button>
+    <button class="role-tab" onclick="switchPanel('teacher')">👩‍🏫 Enter Marks</button>
+  </div>
+
+  <!-- ═══════════════════════════════ STUDENT PANEL ═══════════════════════════════ -->
+  <div id="panel-student" class="panel active">
+    <div class="panel-hd">
+      <div class="panel-title">📋 My Result</div>
+      <div class="panel-sub">Select your class and exam to view your marksheet.</div>
+    </div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Class</label>
+        <select id="s-class" onchange="loadStudentList()">
+          <option value="">-- Select Class --</option>
+          <option>3</option><option>4</option><option>5</option>
+          <option>6</option><option>7</option><option>8</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Exam</label>
+        <select id="s-exam">
+          <option value="">-- Select Exam --</option>
+          <option>Unit Test 1</option><option>Half Yearly</option>
+          <option>Unit Test 2</option><option>Annual Exam</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Student Name</label>
+        <select id="s-student">
+          <option value="">-- Select Student --</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row no-print">
+      <button class="btn btn-navy" onclick="fetchResult()">🔍 View Marksheet</button>
+    </div>
+    <div id="s-msg" class="msg"></div>
+    <div id="marksheet-view" style="margin-top:28px;display:none"></div>
+  </div>
+
+  <!-- ═══════════════════════════════ TEACHER PANEL ═══════════════════════════════ -->
+  <div id="panel-teacher" class="panel">
+    <div class="panel-hd">
+      <div class="panel-title">✏️ Enter Student Marks</div>
+      <div class="panel-sub">Select class and exam, then fill in marks for each student.</div>
+    </div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Class</label>
+        <select id="t-class" onchange="loadTeacherForm()">
+          <option value="">-- Select Class --</option>
+          <option>3</option><option>4</option><option>5</option>
+          <option>6</option><option>7</option><option>8</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Exam</label>
+        <select id="t-exam" onchange="loadTeacherForm()">
+          <option value="">-- Select Exam --</option>
+          <option>Unit Test 1</option><option>Half Yearly</option>
+          <option>Unit Test 2</option><option>Annual Exam</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Max Marks per Subject</label>
+        <select id="t-max">
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100" selected>100</option>
+        </select>
+      </div>
+    </div>
+    <div id="teacher-form-area"></div>
+    <div id="t-msg" class="msg"></div>
+  </div>
+</div>
+
+<script type="module">
+const FC={apiKey:"AIzaSyAIHBis4Sye1PdkbX1ENZa02_6YtJG874Y",authDomain:"indooxfordacademy-94000.firebaseapp.com",projectId:"indooxfordacademy-94000",storageBucket:"indooxfordacademy-94000.firebasestorage.app",messagingSenderId:"88109643719",appId:"1:88109643719:web:0bf5bb98c213ea06e0cbe2"};
+const {initializeApp}=await import('https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js');
+const {getFirestore,doc,setDoc,getDoc,collection,query,where,getDocs}=await import('https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js');
+const app=initializeApp(FC,'results');
+const db=getFirestore(app);
+
+// Students per class
+const STUDENTS={
+  '3':['Alpha','Nancy','Piyush','Himanshu','Sagar','Akash','Manish','Anup','Vikalp'],
+  '4':['Student 1','Student 2','Student 3','Student 4','Student 5'],
+  '5':['Student 1','Student 2','Student 3','Student 4','Student 5'],
+  '6':['Student 1','Student 2','Student 3','Student 4','Student 5'],
+  '7':['Student 1','Student 2','Student 3','Student 4','Student 5'],
+  '8':['Student 1','Student 2','Student 3','Student 4','Student 5'],
+};
+// Subjects per class
+const SUBJECTS={
+  '3':['English','Hindi','Maths','EVS','GK','Computer','Drawing'],
+  '4':['English','Hindi','Maths','Science','EVS','GK','Computer','Drawing'],
+  '5':['English','Hindi','Maths','Science','Social Science','GK','Computer','Drawing'],
+  '6':['English','Hindi','Maths','Science','Social Science','GK','Computer','Drawing'],
+  '7':['English','Hindi','Maths','Science','Social Science','GK','Computer'],
+  '8':['English','Hindi','Maths','Science','Social Science','Computer'],
+};
+
+function showMsg(id,msg,type){const el=document.getElementById(id);el.textContent=msg;el.className='msg show '+type;}
+function grade(pct){if(pct>=80)return{g:'A+',cls:'grade-a'};if(pct>=60)return{g:'A',cls:'grade-a'};if(pct>=45)return{g:'B',cls:'grade-b'};if(pct>=33)return{g:'C',cls:'grade-c'};return{g:'D',cls:'grade-d'};}
+function passFail(pct){return pct>=33;}
+
+window.switchPanel=(p)=>{
+  document.querySelectorAll('.role-tab').forEach((t,i)=>t.classList.toggle('active',i===(p==='student'?0:1)));
+  document.getElementById('panel-student').classList.toggle('active',p==='student');
+  document.getElementById('panel-teacher').classList.toggle('active',p==='teacher');
+};
+
+// ── STUDENT SIDE ──
+window.loadStudentList=()=>{
+  const cls=document.getElementById('s-class').value;
+  const sel=document.getElementById('s-student');
+  sel.innerHTML='<option value="">-- Select Student --</option>';
+  if(!cls)return;
+  (STUDENTS[cls]||[]).forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;sel.appendChild(o);});
+};
+
+window.fetchResult=async()=>{
+  const cls=document.getElementById('s-class').value;
+  const exam=document.getElementById('s-exam').value;
+  const student=document.getElementById('s-student').value;
+  if(!cls||!exam||!student){showMsg('s-msg','Please select class, exam and student name.','err');return;}
+  showMsg('s-msg','<span class="spinner"></span> Loading marksheet...','info');
+  document.getElementById('s-msg').innerHTML='<span class="spinner"></span> Loading marksheet...';
+  try{
+    const docId=`${cls}_${exam}_${student}`.replace(/\s+/g,'_');
+    const snap=await getDoc(doc(db,'results',docId));
+    if(!snap.exists()){showMsg('s-msg','No result found. Teacher has not entered marks yet.','err');document.getElementById('marksheet-view').style.display='none';return;}
+    document.getElementById('s-msg').style.display='none';
+    renderMarksheet(snap.data(),student,cls,exam);
+  }catch(e){showMsg('s-msg',e.message,'err');}
+};
+
+function renderMarksheet(data,student,cls,exam){
+  const subjects=SUBJECTS[cls]||[];
+  const max=data.maxMarks||100;
+  let totalObt=0,totalMax=0;
+  const rows=subjects.map(sub=>{
+    const marks=data.marks?.[sub]??'—';
+    const obt=typeof marks==='number'?marks:0;
+    totalObt+=obt;totalMax+=max;
+    const pct=max>0?Math.round((obt/max)*100):0;
+    const {g,cls:gc}=grade(pct);
+    const pass=passFail(pct);
+    return`<tr><td class="subject-col">${sub}</td><td style="text-align:center">${marks}</td><td style="text-align:center">${max}</td><td style="text-align:center">${pct}%</td><td style="text-align:center"><span class="grade-pill ${gc}">${g}</span></td><td style="text-align:center;font-weight:700;color:${pass?'var(--green)':'var(--red)'}">${pass?'Pass':'Fail'}</td></tr>`;
+  }).join('');
+  const totalPct=totalMax>0?Math.round((totalObt/totalMax)*100):0;
+  const overallPass=totalPct>=33;
+  const {g:ovG,cls:ovC}=grade(totalPct);
+  document.getElementById('marksheet-view').style.display='block';
+  document.getElementById('marksheet-view').innerHTML=`
+  <div class="marksheet" id="printArea">
+    <div class="ms-header">
+      <div class="ms-logo"><img src="logo.png" alt="IOA" onerror="this.onerror=null;this.parentNode.innerHTML='<span style=\\'font-family:Playfair Display,serif;font-weight:900;color:#f0c96a;font-size:14px\\'>IO</span>'"/></div>
+      <div>
+        <div class="ms-school">Indo Oxford Academy</div>
+        <div class="ms-school-sub">Where Curiosity Meets Care — Est. 2012</div>
+      </div>
+      <div style="margin-left:auto;text-align:right">
+        <div style="font-size:12px;color:var(--muted)">Generated</div>
+        <div style="font-size:13px;font-weight:600;color:var(--navy)">${new Date().toLocaleDateString('en-IN')}</div>
+      </div>
+    </div>
+    <div class="ms-title">
+      <h2>Progress Report Card</h2>
+      <p>${exam} — Academic Year 2025–26</p>
+    </div>
+    <div class="ms-info-grid">
+      <div class="ms-info-item"><div class="lbl">Student Name</div><div class="val">${student}</div></div>
+      <div class="ms-info-item"><div class="lbl">Class</div><div class="val">Class ${cls}</div></div>
+      <div class="ms-info-item"><div class="lbl">Exam</div><div class="val">${exam}</div></div>
+      <div class="ms-info-item"><div class="lbl">Max Per Subject</div><div class="val">${max}</div></div>
+    </div>
+    <div class="ms-table-wrap">
+      <table class="ms-table">
+        <thead><tr><th>Subject</th><th style="text-align:center">Marks Obtained</th><th style="text-align:center">Max Marks</th><th style="text-align:center">Percentage</th><th style="text-align:center">Grade</th><th style="text-align:center">Status</th></tr></thead>
+        <tbody>${rows}</tbody>
+        <tfoot><tr style="background:var(--navy);color:#fff"><td style="font-weight:700;padding:12px 16px">TOTAL</td><td style="text-align:center;font-weight:700;padding:12px 16px">${totalObt}</td><td style="text-align:center;font-weight:700;padding:12px 16px">${totalMax}</td><td style="text-align:center;font-weight:700;padding:12px 16px">${totalPct}%</td><td style="text-align:center;padding:12px 16px"><span class="grade-pill ${ovC}" style="background:rgba(255,255,255,.15);color:#fff">${ovG}</span></td><td style="text-align:center;font-weight:700;padding:12px 16px;color:${overallPass?'#86efac':'#fca5a5'}">${overallPass?'PASS':'FAIL'}</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="ms-summary">
+      <div class="summary-card"><div class="s-num" style="color:var(--navy)">${totalObt}/${totalMax}</div><div class="s-lbl">Total Marks</div></div>
+      <div class="summary-card"><div class="s-num" style="color:var(--blue)">${totalPct}%</div><div class="s-lbl">Percentage</div></div>
+      <div class="summary-card"><div class="s-num" style="color:var(--gold)">${ovG}</div><div class="s-lbl">Overall Grade</div></div>
+      <div class="summary-card"><div class="s-num" style="color:${overallPass?'var(--green)':'var(--red)'}">${overallPass?'✓':'✗'}</div><div class="s-lbl">Result</div></div>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <span class="result-stamp ${overallPass?'stamp-pass':'stamp-fail'}">${overallPass?'🎉 PROMOTED — PASS':'📚 NEEDS IMPROVEMENT — FAIL'}</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px dashed #e0e8f0;font-size:12px;color:var(--muted)">
+      <div>Class Teacher's Signature: ___________________</div>
+      <div>Principal's Signature: ___________________</div>
+    </div>
+  </div>
+  <button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>`;
+}
+
+// ── TEACHER SIDE ──
+window.loadTeacherForm=()=>{
+  const cls=document.getElementById('t-class').value;
+  const exam=document.getElementById('t-exam').value;
+  if(!cls||!exam){document.getElementById('teacher-form-area').innerHTML='';return;}
+  const students=STUDENTS[cls]||[];
+  const subjects=SUBJECTS[cls]||[];
+  const maxSel=document.getElementById('t-max');
+  let html=`<div class="marks-table-wrap"><table class="marks-table"><thead><tr><th>Student Name</th>`;
+  subjects.forEach(s=>html+=`<th style="text-align:center">${s}</th>`);
+  html+=`</tr></thead><tbody>`;
+  students.forEach(st=>{
+    html+=`<tr><td style="font-weight:600;color:var(--navy);white-space:nowrap">${st}</td>`;
+    subjects.forEach(sub=>{
+      const fid=`m_${st.replace(/\s+/g,'_')}_${sub.replace(/\s+/g,'_')}`;
+      html+=`<td style="text-align:center"><input type="number" id="${fid}" min="0" max="100" placeholder="—" style="width:64px"/></td>`;
+    });
+    html+=`</tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  html+=`<div class="btn-row"><button class="btn btn-gold" onclick="saveMarks()">💾 Save All Marks</button><button class="btn btn-navy" onclick="loadExisting()"><span id="loadSpinner" style="display:none" class="spinner"></span>📥 Load Existing</button></div>`;
+  document.getElementById('teacher-form-area').innerHTML=html;
+  // auto-load existing
+  loadExistingMarks(cls,exam,students,subjects);
+};
+
+async function loadExistingMarks(cls,exam,students,subjects){
+  for(const st of students){
+    const docId=`${cls}_${exam}_${st}`.replace(/\s+/g,'_');
+    try{
+      const snap=await getDoc(doc(db,'results',docId));
+      if(snap.exists()&&snap.data().marks){
+        const marks=snap.data().marks;
+        subjects.forEach(sub=>{
+          const fid=`m_${st.replace(/\s+/g,'_')}_${sub.replace(/\s+/g,'_')}`;
+          const el=document.getElementById(fid);
+          if(el&&marks[sub]!==undefined)el.value=marks[sub];
+        });
+      }
+    }catch(e){}
+  }
+}
+
+window.loadExisting=()=>{
+  const cls=document.getElementById('t-class').value;
+  const exam=document.getElementById('t-exam').value;
+  if(!cls||!exam)return;
+  loadExistingMarks(cls,exam,STUDENTS[cls]||[],SUBJECTS[cls]||[]);
+  showMsg('t-msg','Existing marks loaded.','ok');
+};
+
+window.saveMarks=async()=>{
+  const cls=document.getElementById('t-class').value;
+  const exam=document.getElementById('t-exam').value;
+  const max=parseInt(document.getElementById('t-max').value)||100;
+  if(!cls||!exam){showMsg('t-msg','Select class and exam first.','err');return;}
+  const students=STUDENTS[cls]||[];
+  const subjects=SUBJECTS[cls]||[];
+  showMsg('t-msg','Saving marks...','info');
+  document.getElementById('t-msg').innerHTML='<span class="spinner"></span> Saving all marks...';
+  try{
+    for(const st of students){
+      const marks={};
+      subjects.forEach(sub=>{
+        const fid=`m_${st.replace(/\s+/g,'_')}_${sub.replace(/\s+/g,'_')}`;
+        const el=document.getElementById(fid);
+        if(el&&el.value!=='')marks[sub]=parseInt(el.value)||0;
+      });
+      if(Object.keys(marks).length>0){
+        const docId=`${cls}_${exam}_${st}`.replace(/\s+/g,'_');
+        await setDoc(doc(db,'results',docId),{student:st,class:cls,exam,marks,maxMarks:max,updatedAt:new Date().toISOString()});
+      }
+    }
+    showMsg('t-msg','✅ All marks saved successfully!','ok');
+  }catch(e){showMsg('t-msg',e.message,'err');}
+};
+</script>
+</body>
+</html>
